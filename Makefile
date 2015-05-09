@@ -1,7 +1,7 @@
 CFLAGS=-Wall -Wextra
 LIBS=-lm
 
-blctl: blctl.o
+blctl: blctl.o config.h
 	cc -o $@ $^ $(LIBS)
 
 all: blctl
