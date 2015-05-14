@@ -74,14 +74,18 @@ main(int argc, char *argv[])
 {
 	int amb_light = 0;
 	int new_br = 0;
+	int old_br = 0;
 	const int max_br = read_max_brightness();
 
 	for (;;) {
 		amb_light = read_ambient_light();
 
 		new_br = map_brightness(amb_light, max_br);
-
-		set_backlight(new_br);
+		
+		if(new_br != old_br) {
+			set_backlight(new_br);
+			old_br = new_br;
+		}
 
 		sleep(1);
 	}
