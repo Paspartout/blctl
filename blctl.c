@@ -37,7 +37,7 @@ map_brightness(int br, int max_br)
 	const double factor = ((double)max_br/(double)(max_am_value));
 	int calc_val = (int) floor( factor * br ) + min_br;
 
-	if(calc_val > max_br)
+	if (calc_val > max_br)
 		calc_val = max_br;
 
 	return calc_val;
@@ -49,7 +49,7 @@ read_max_brightness()
 	int max_br = 0;
 	FILE *f = fopen(bl_max_br_path, "r");
 
-	if(f == NULL)
+	if (f == NULL)
 		err("can't open screen brightness file to write");
 	if (fscanf(f, "%d", &max_br) < 1)
 		err("can't write new brightness");
@@ -62,7 +62,7 @@ static void
 set_backlight(int br)
 {
 	FILE *f = fopen(bl_br_path, "w");
-	if(f == NULL)
+	if (f == NULL)
 		err("can't open screen brightness file to write");
 	if (fprintf(f, "%d", br) < 1)
 		err("can't write new brightness");
@@ -70,7 +70,7 @@ set_backlight(int br)
 }
 
 int
-main(int argc, char *argv[])
+main(void)
 {
 	int amb_light = 0;
 	int new_br = 0;
@@ -82,7 +82,7 @@ main(int argc, char *argv[])
 
 		new_br = map_brightness(amb_light, max_br);
 		
-		if(new_br != old_br) {
+		if (new_br != old_br) {
 			set_backlight(new_br);
 			old_br = new_br;
 		}

@@ -1,10 +1,14 @@
-CFLAGS=-Wall -Wextra
+CFLAGS=-Os -Wall -Wextra
+#CFLAGS=-O0 -g -ggdb -Wall -Wextra
 LIBS=-lm
 
-blctl: blctl.o config.h
+TARGET=blctl
+
+$(TARGET): blctl.o config.h
 	cc -o $@ $^ $(LIBS)
 
-all: blctl
+install: $(TARGET)
+	cp $(TARGET) ${DESTDIR}${PREFIX}/bin/
 
 clean:
 	rm -f *.o
