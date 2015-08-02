@@ -78,7 +78,7 @@ main(void)
 	for (;;) {
 		amb_light = read_ambient_light();
 		set_backlight(map_brightness(amb_light, max_br));
-		sleep(1);
+		sleep(update_rate);
 	}
 
 	return 0;
