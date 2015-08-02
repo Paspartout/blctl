@@ -73,21 +73,13 @@ int
 main(void)
 {
 	int amb_light = 0;
-	int new_br = 0;
-	int old_br = 0;
 	const int max_br = read_max_brightness();
 
 	for (;;) {
 		amb_light = read_ambient_light();
-
-		new_br = map_brightness(amb_light, max_br);
-		
-		if (new_br != old_br) {
-			set_backlight(new_br);
-			old_br = new_br;
-		}
-
+		set_backlight(map_brightness(amb_light, max_br));
 		sleep(1);
 	}
+
 	return 0;
 }
